@@ -1,31 +1,48 @@
 package com.aquilla.ludumdare;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
+import com.aquilla.ludumdare.screen.LoadingScreen;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class LudumDare extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+public class LudumDare extends Game {
+
+	public static final String TITLE = "Ludum Dare 51";
+	public static final int WIDTH = 256;
+	public static final int HEIGHT = 224;
+	public static final int SCALE = 3;
+
+	public enum Mode { DESKTOP, HTML }
+	public static Mode mode;
+
+	private SpriteBatch batch;
+	private ShapeRenderer sr;
+
 	@Override
-	public void create () {
+	public void create() {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		sr = new ShapeRenderer();
+		sr.setAutoShapeType(true);
+		setScreen(new LoadingScreen(this));
 	}
 
 	@Override
-	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	public void render() {
+		super.render();
 	}
-	
+
+	public SpriteBatch getBatch() {
+		return batch;
+	}
+
+	public ShapeRenderer getShapeRenderer() {
+		return sr;
+	}
+
 	@Override
-	public void dispose () {
+	public void dispose() {
 		batch.dispose();
-		img.dispose();
+		sr.dispose();
 	}
 }
