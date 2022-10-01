@@ -83,12 +83,16 @@ public class LoadingScreen extends Screen{
         // Inner
         width = BAR_WIDTH + (BORDER_GAP) * 2;
         height = BAR_HEIGHT + (BORDER_GAP) * 2;
+        x = (LudumDare.WIDTH  - width)  / 2;
+        y = (LudumDare.HEIGHT - height) / 2;
         sr.setColor(BACKGROUND_COLOR);
         sr.rect(x, y, width, height);
 
         // Bar
         width = BAR_WIDTH;
         height = BAR_HEIGHT;
+        x = (LudumDare.WIDTH  - width)  / 2;
+        y = (LudumDare.HEIGHT - height) / 2;
 
         // If in HTML mode, set bar at 50% process so it seemlessly continues from splash screen
         if (LudumDare.mode == LudumDare.Mode.HTML) width = (1 + assets.getProgress() * (width * 0.5f));
