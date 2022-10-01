@@ -87,9 +87,6 @@ public class GameScreen extends Screen {
 
     @Override
     public void draw(SpriteBatch sb, ShapeRenderer sr) {
-        Gdx.gl.glClearColor(Palette.DEEP.r, Palette.DEEP.g, Palette.DEEP.b, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         sb.setProjectionMatrix(getCam().combined);
         sr.setProjectionMatrix(getCam().combined);
 
