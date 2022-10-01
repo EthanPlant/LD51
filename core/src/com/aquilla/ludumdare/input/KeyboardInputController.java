@@ -10,6 +10,7 @@ public class KeyboardInputController extends InputController implements InputPro
     private boolean left;
     private boolean right;
 
+    private boolean jump;
     private GameScreen game;
 
     public KeyboardInputController(GameScreen game) {
@@ -20,6 +21,7 @@ public class KeyboardInputController extends InputController implements InputPro
     public void update(float delta) {
         left = Gdx.input.isKeyPressed(Input.Keys.A);
         right = Gdx.input.isKeyPressed(Input.Keys.D);
+        jump = Gdx.input.isKeyPressed(Input.Keys.W);
     }
 
     @Override
@@ -30,6 +32,11 @@ public class KeyboardInputController extends InputController implements InputPro
     @Override
     public boolean right() {
         return right;
+    }
+
+    @Override
+    public boolean jump() {
+        return jump;
     }
 
     @Override

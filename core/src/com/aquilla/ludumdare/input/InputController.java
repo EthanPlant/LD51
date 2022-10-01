@@ -9,6 +9,7 @@ public abstract class InputController implements InputProcessor {
     abstract public void update(float delta);
     abstract public boolean left();
     abstract public boolean right();
+    abstract public boolean jump();
 
     public void enable() {
         enabled = true;
