@@ -23,6 +23,7 @@ public class Player extends Entity {
     private State state;
 
     private Animation<TextureRegion> idle;
+    private Animation<TextureRegion> walking;
     private float frameTime;
     private boolean isRight;
 
@@ -31,6 +32,7 @@ public class Player extends Entity {
         boundingBox.height = 18;
         isRight = true;
         idle = new Animation<TextureRegion>(0.1f, Assets.get().getTextureAtlas("textures/player.atlas").findRegions("player-idle"), Animation.PlayMode.LOOP_PINGPONG);
+        walking = new Animation<TextureRegion>(0.1f, Assets.get().getTextureAtlas("textures/player.atlas").findRegions("player_walk"), Animation.PlayMode.LOOP);
         state = State.STANDING;
     }
 
@@ -96,8 +98,10 @@ public class Player extends Entity {
     }
 
     public void draw(SpriteBatch sb, boolean isDown) {
-        int index = idle.getKeyFrameIndex(frameTime);
-        TextureRegion currentFrame = idle.getKeyFrame(frameTime, true);
+        TextureRegion currentFrame;
+        if (state == State.STANDING)  currentFrame = idle.getKeyFrame(frameTime, true);
+        else if (state == State.RUNNING) currentFrame = walking.getKeyFrame(frameTime, true);
+        else currentFrame = idle.getKeyFrame(frameTime, true);
         float x = isRight ? pos.x + currentFrame.getRegionWidth() : pos.x;
         float y = isDown ? pos.y : pos.y + currentFrame.getRegionHeight();
         float width = isRight ? -1 * currentFrame.getRegionWidth() : currentFrame.getRegionWidth();
