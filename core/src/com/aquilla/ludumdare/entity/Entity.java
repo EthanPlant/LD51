@@ -18,11 +18,23 @@ public class Entity {
     }
 
     public void update(float delta) {
+        vel.add(accel.cpy().scl(delta));
+        pos.add(vel.cpy().scl(delta));
 
+        boundingBox.x = pos.x;
+        boundingBox.y = pos.y;
     }
 
     public Vector2 getPos() {
         return pos;
+    }
+
+    public Vector2 getVel() {
+        return vel;
+    }
+
+    public void setVel(Vector2 vel) {
+        this.vel = vel;
     }
 
     public Rectangle getBoundingBox() {

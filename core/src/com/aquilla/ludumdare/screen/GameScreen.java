@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 
 public class GameScreen extends Screen {
     // Map variables
@@ -36,8 +37,13 @@ public class GameScreen extends Screen {
     public void update(float delta) {
         input.update(delta);
 
-        if (input.left()) getCam().position.set(getCam().position.x - 10, getCam().position.y, getCam().position.z);
-        if (input.right()) getCam().position.set(getCam().position.x + 10, getCam().position.y, getCam().position.z);
+        if (input.left()) player.setVel(new Vector2(-1 * Player.PLAYER_SPEED * LudumDare.TILE_SIZE, player.getVel().y));
+        if (input.right()) player.setVel(new Vector2(Player.PLAYER_SPEED * LudumDare.TILE_SIZE, player.getVel().y));
+
+        if (!input.left() && !input.right()) player.setVel(new Vector2(0, player.getVel().y));
+
+        player.update(delta);
+        getCam().position.set(player.getPos(), 0);
 
         getCam().update();
     }
