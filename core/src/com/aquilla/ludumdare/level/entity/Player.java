@@ -1,10 +1,8 @@
-package com.aquilla.ludumdare.entity;
+package com.aquilla.ludumdare.level.entity;
 
 import com.aquilla.ludumdare.LudumDare;
 import com.aquilla.ludumdare.assets.Assets;
 import com.aquilla.ludumdare.util.CollisionHandler;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Entity {
 
@@ -16,7 +14,6 @@ public class Player extends Entity {
 
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
-        accel = new Vector2(0, -1 * LudumDare.GRAVITY_STRENGTH);
         state = State.RUNNING;
     }
 

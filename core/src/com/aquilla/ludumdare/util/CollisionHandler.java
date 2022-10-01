@@ -1,6 +1,6 @@
 package com.aquilla.ludumdare.util;
 
-import com.aquilla.ludumdare.entity.Entity;
+import com.aquilla.ludumdare.level.entity.Entity;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;

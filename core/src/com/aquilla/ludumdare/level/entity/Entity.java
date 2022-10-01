@@ -1,4 +1,4 @@
-package com.aquilla.ludumdare.entity;
+package com.aquilla.ludumdare.level.entity;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -35,6 +35,10 @@ public class Entity {
 
     public void setVel(Vector2 vel) {
         this.vel = vel;
+    }
+
+    public void setAccel(Vector2 accel) {
+        this.accel = accel;
     }
 
     public Rectangle getBoundingBox() {

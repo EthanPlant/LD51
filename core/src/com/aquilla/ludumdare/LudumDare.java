@@ -17,7 +17,6 @@ public class LudumDare extends Game {
 	public enum Mode { DESKTOP, HTML }
 	public static Mode mode;
 
-	public static int GRAVITY_STRENGTH = 15 * TILE_SIZE;
 
 	private SpriteBatch batch;
 	private ShapeRenderer sr;
