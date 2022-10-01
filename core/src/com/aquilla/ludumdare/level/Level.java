@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import static com.aquilla.ludumdare.LudumDare.TILE_SIZE;
 
 public class Level {
-    public static int GRAVITY_STRENGTH = 15 * TILE_SIZE;
+    public static final int GRAVITY_STRENGTH = 15 * TILE_SIZE;
 
     private boolean isGravityDown;
 
@@ -31,8 +31,6 @@ public class Level {
 
     public void update(float delta) {
         // Set player gravity
-        if (isGravityDown) player.setAccel(new Vector2(0, -1 * GRAVITY_STRENGTH));
-        else player.setAccel(new Vector2(0, GRAVITY_STRENGTH));
         player.update(delta, isGravityDown);
     }
 
@@ -44,6 +42,8 @@ public class Level {
 
     public void switchGravity() {
         isGravityDown = !isGravityDown;
+        if (isGravityDown) player.setAccel(new Vector2(player.getAccel().x, -1 * GRAVITY_STRENGTH));
+        else player.setAccel(new Vector2(player.getAccel().x, GRAVITY_STRENGTH));
     }
 
     public OrthogonalTiledMapRenderer getRenderer() {

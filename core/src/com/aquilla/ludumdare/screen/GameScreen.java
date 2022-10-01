@@ -44,11 +44,25 @@ public class GameScreen extends Screen {
     public void update(float delta) {
         input.update(delta);
 
-        if (input.left()) level.getPlayer().setVel(new Vector2(-1 * Player.PLAYER_SPEED * LudumDare.TILE_SIZE, level.getPlayer().getVel().y));
-        if (input.right()) level.getPlayer().setVel(new Vector2(Player.PLAYER_SPEED * LudumDare.TILE_SIZE, level.getPlayer().getVel().y));
+        if (input.left()) {
+            float accel = -1 * Player.ACCEL_SPEED;
+            if (level.getPlayer().getVel().x > 0) accel -= (Player.ACCEL_SPEED * Player.ACCEL_PERCENTAGE);
+            level.getPlayer().setAccel(new Vector2(accel, level.getPlayer().getAccel().y));
+            if(level.getPlayer().getVel().y == 0) level.getPlayer().setState(Player.State.RUNNING);
+        }
+        if (input.right()) {
+            float accel = Player.ACCEL_SPEED;
+            if (level.getPlayer().getVel().x < 0) accel += (Player.ACCEL_SPEED * Player.ACCEL_PERCENTAGE);
+            level.getPlayer().setAccel(new Vector2(accel, level.getPlayer().getAccel().y));
+            if(level.getPlayer().getVel().y == 0) level.getPlayer().setState(Player.State.RUNNING);
+        }
+
+        if (level.getPlayer().getState() == Player.State.JUMPING || level.getPlayer().getState() == Player.State.FALLING)
+            level.getPlayer().getAccel().x *= 2;
+
         if (input.jump()) level.getPlayer().jump(level.isGravityDown());
 
-        if (!input.left() && !input.right()) level.getPlayer().setVel(new Vector2(0, level.getPlayer().getVel().y));
+        if (!input.left() && !input.right()) level.getPlayer().setState(Player.State.STANDING);
 
         if (TimeUtils.nanoTime() - timer >= 1_000_000_000) {
             timeToSwitch--;

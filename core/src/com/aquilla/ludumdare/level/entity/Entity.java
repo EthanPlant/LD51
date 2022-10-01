@@ -37,6 +37,10 @@ public class Entity {
         this.vel = vel;
     }
 
+    public Vector2 getAccel() {
+        return accel;
+    }
+
     public void setAccel(Vector2 accel) {
         this.accel = accel;
     }
