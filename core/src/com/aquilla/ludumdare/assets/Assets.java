@@ -1,6 +1,7 @@
 package com.aquilla.ludumdare.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -17,6 +18,14 @@ public class Assets {
         return instance;
     }
 
+    public BitmapFont getFont(String ref) {
+        return manager.get(ref, BitmapFont.class);
+    }
+
+    public Sound getSound(String ref) {
+        return manager.get(ref, Sound.class);
+    }
+
     public Texture getTexture(String ref) {
         return manager.get(ref, Texture.class);
     }
@@ -27,10 +36,6 @@ public class Assets {
 
     public TiledMap getTiledMap(String ref) {
         return manager.get(ref, TiledMap.class);
-    }
-
-    public BitmapFont getFont(String ref) {
-        return manager.get(ref, BitmapFont.class);
     }
 
     public void provide(AssetManager assets) {

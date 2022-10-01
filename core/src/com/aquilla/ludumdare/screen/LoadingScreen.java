@@ -5,6 +5,7 @@ import com.aquilla.ludumdare.assets.Assets;
 import com.aquilla.ludumdare.util.Palette;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -36,6 +37,8 @@ public class LoadingScreen extends Screen{
         assets.load("fonts/hud.fnt", BitmapFont.class);
         assets.load("maps/level1.tmx", TiledMap.class);
         assets.load("maps/testmap.tmx", TiledMap.class);
+        assets.load("sounds/jump.wav", Sound.class);
+        assets.load("sounds/switch.wav", Sound.class);
         assets.load("textures/background.png", Texture.class);
         assets.load("textures/player.atlas", TextureAtlas.class);
     }

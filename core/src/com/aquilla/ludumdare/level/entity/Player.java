@@ -73,11 +73,15 @@ public class Player extends Entity {
 
         // Check for collision
         boundingBox.x += (vel.x * delta);
-        if (CollisionHandler.get().isCollidingWithMap(this, Assets.get().getTiledMap("maps/level1.tmx"))) vel.x = 0;
+        if (CollisionHandler.get().isCollidingWithMap(this, Assets.get().getTiledMap("maps/level1.tmx")))  {
+            vel.x = 0;
+        }
         boundingBox.x = pos.x;
         boundingBox.y += (vel.y * delta);
         if (CollisionHandler.get().isCollidingWithMap(this, Assets.get().getTiledMap("maps/level1.tmx"))) {
-            if (state == State.FALLING) state = State.RUNNING; // We've hit the ground so we're no longer falling
+            if (state == State.FALLING) {
+                state = State.RUNNING; // We've hit the ground so we're no longer falling
+            }
             vel.y = 0;
         }
         boundingBox.y = pos.y;
@@ -102,7 +106,8 @@ public class Player extends Entity {
     }
 
     public void jump(boolean isDown) {
-        if (state == State.RUNNING) {
+        if (state == State.RUNNING || state == State.STANDING) {
+            Assets.get().getSound("sounds/jump.wav").play();
             if (isDown) vel.y =  JUMP_SPEED;
             else vel.y =  -1 * JUMP_SPEED;
             state = State.JUMPING;

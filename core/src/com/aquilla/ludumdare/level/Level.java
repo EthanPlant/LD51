@@ -1,5 +1,6 @@
 package com.aquilla.ludumdare.level;
 
+import com.aquilla.ludumdare.assets.Assets;
 import com.aquilla.ludumdare.level.entity.Player;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -50,6 +51,7 @@ public class Level {
     }
 
     public void switchGravity() {
+        Assets.get().getSound("sounds/switch.wav").play();
         isGravityDown = !isGravityDown;
         if (isGravityDown) player.setAccel(new Vector2(player.getAccel().x, -1 * GRAVITY_STRENGTH));
         else player.setAccel(new Vector2(player.getAccel().x, GRAVITY_STRENGTH));
