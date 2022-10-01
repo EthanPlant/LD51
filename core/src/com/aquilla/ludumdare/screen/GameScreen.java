@@ -6,9 +6,6 @@ import com.aquilla.ludumdare.level.Level;
 import com.aquilla.ludumdare.input.KeyboardInputController;
 import com.aquilla.ludumdare.level.entity.Player;
 import com.aquilla.ludumdare.ui.Hud;
-import com.aquilla.ludumdare.util.Palette;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -36,6 +33,10 @@ public class GameScreen extends Screen {
 
         timer = TimeUtils.nanoTime();
         timeToSwitch = 10;
+
+        Assets.get().getMusic("music/bgm.ogg").setLooping(true);
+        Assets.get().getMusic("music/bgm.ogg").setVolume(0.5F);
+        Assets.get().getMusic("music/bgm.ogg").play();
 
         hud = new Hud(this);
     }
