@@ -2,10 +2,13 @@ package com.aquilla.ludumdare.level.entity;
 
 import com.aquilla.ludumdare.LudumDare;
 import com.aquilla.ludumdare.assets.Assets;
-import com.aquilla.ludumdare.level.Level;
 import com.aquilla.ludumdare.util.CollisionHandler;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 
 public class Player extends Entity {
 
@@ -18,14 +21,16 @@ public class Player extends Entity {
 
     public enum State {STANDING, RUNNING, JUMPING, FALLING}
     private State state;
-    private Texture texture;
+
+    private Animation<TextureRegion> idle;
+    private float frameTime;
     private boolean isRight;
 
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
         boundingBox.height = 18;
         isRight = true;
-        texture = Assets.get().getTexture("textures/player.png");
+        idle = new Animation<TextureRegion>(0.1f, Assets.get().getTextureAtlas("textures/player.atlas").findRegions("player-idle"), Animation.PlayMode.LOOP_PINGPONG);
         state = State.STANDING;
     }
 
@@ -81,10 +86,19 @@ public class Player extends Entity {
         pos.add(vel.cpy().scl(delta));
         boundingBox.x = pos.x;
         boundingBox.y = isDown ? pos.y : pos.y + 14;
+
+        // Update animation time
+        frameTime += delta;
     }
 
     public void draw(SpriteBatch sb, boolean isDown) {
-        sb.draw(texture, pos.x, pos.y, texture.getWidth(), texture.getHeight(), 0, 0, texture.getWidth(), texture.getHeight(), isRight, !isDown);
+        int index = idle.getKeyFrameIndex(frameTime);
+        TextureRegion currentFrame = idle.getKeyFrame(frameTime, true);
+        float x = isRight ? pos.x + currentFrame.getRegionWidth() : pos.x;
+        float y = isDown ? pos.y : pos.y + currentFrame.getRegionHeight();
+        float width = isRight ? -1 * currentFrame.getRegionWidth() : currentFrame.getRegionWidth();
+        float height = isDown ? currentFrame.getRegionHeight() : -1 * currentFrame.getRegionHeight();
+        sb.draw(currentFrame, x, y, width, height);
     }
 
     public void jump(boolean isDown) {
