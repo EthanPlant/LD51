@@ -82,7 +82,7 @@ public class Player extends Entity {
         boundingBox.y += (vel.y * delta);
         if (CollisionHandler.get().isCollidingWithMap(this, Assets.get().getTiledMap("maps/level1.tmx"))) {
             if (state == State.FALLING) {
-                state = State.RUNNING; // We've hit the ground so we're no longer falling
+                state = vel.x != 0 ? State.RUNNING : State.STANDING; // We've hit the ground so we're no longer falling
             }
             vel.y = 0;
         }
@@ -99,7 +99,9 @@ public class Player extends Entity {
 
     public void draw(SpriteBatch sb, boolean isDown) {
         TextureRegion currentFrame;
-        if (state == State.STANDING)  currentFrame = idle.getKeyFrame(frameTime, true);
+        if (state == State.STANDING) {
+            currentFrame = idle.getKeyFrame(frameTime, true);
+        }
         else if (state == State.RUNNING) currentFrame = walking.getKeyFrame(frameTime, true);
         else currentFrame = idle.getKeyFrame(frameTime, true);
         float x = isRight ? pos.x + currentFrame.getRegionWidth() : pos.x;

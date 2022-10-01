@@ -12,7 +12,7 @@ public class DesktopLauncher {
 
 		config.setTitle(TITLE);
 		config.setWindowedMode(WIDTH * SCALE, HEIGHT * SCALE);
-		config.setResizable(false);
+		config.setResizable(true);
 
 		LudumDare.mode = Mode.DESKTOP;
 
