@@ -4,10 +4,13 @@ import com.aquilla.ludumdare.LudumDare;
 import com.aquilla.ludumdare.assets.Assets;
 import com.aquilla.ludumdare.util.Palette;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Matrix4;
 
 public class LoadingScreen extends Screen{
@@ -25,9 +28,10 @@ public class LoadingScreen extends Screen{
 
         // Initialise asset loading
         assets = new AssetManager();
+        assets.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
 
         // Load all assets
-        assets.load("badlogic.jpg", Texture.class);
+        assets.load("maps/testmap.tmx", TiledMap.class);
     }
 
     @Override

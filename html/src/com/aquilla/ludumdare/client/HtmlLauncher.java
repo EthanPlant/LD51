@@ -18,7 +18,7 @@ public class HtmlLauncher extends GwtApplication {
         private GwtApplicationConfiguration cfg;
         @Override
         public GwtApplicationConfiguration getConfig () {
-                cfg = new GwtApplicationConfiguration(true);
+                cfg = new GwtApplicationConfiguration(LudumDare.WIDTH * LudumDare.SCALE, LudumDare.HEIGHT * LudumDare.SCALE);
                 Window.enableScrolling(false);
                 Window.setMargin("0");
 
