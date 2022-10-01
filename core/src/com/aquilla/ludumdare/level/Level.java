@@ -1,8 +1,10 @@
 package com.aquilla.ludumdare.level;
 
 import com.aquilla.ludumdare.level.entity.Player;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import static com.aquilla.ludumdare.LudumDare.TILE_SIZE;
@@ -23,7 +25,8 @@ public class Level {
         this.map = map;
         renderer = new OrthogonalTiledMapRenderer(map);
 
-        player = new Player(0, TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE);
+        Vector2 spawnPoint = findPlayerSpawn();
+        player = new Player(spawnPoint.x, spawnPoint.y, TILE_SIZE, 2 * TILE_SIZE);
         player.setAccel(new Vector2(0, -1 * GRAVITY_STRENGTH));
 
         isGravityDown = true;
@@ -38,6 +41,11 @@ public class Level {
         renderer.render();
 
         // TODO Draw player sprite
+    }
+
+    private Vector2 findPlayerSpawn() {
+        Rectangle rect = ((RectangleMapObject) map.getLayers().get("player_spawn").getObjects().get(0)).getRectangle();
+        return new Vector2(rect.x, rect.y);
     }
 
     public void switchGravity() {
