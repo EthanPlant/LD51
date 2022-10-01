@@ -90,6 +90,12 @@ public class GameScreen extends Screen {
         sb.setProjectionMatrix(getCam().combined);
         sr.setProjectionMatrix(getCam().combined);
 
+        sb.disableBlending();
+        sb.begin();
+        sb.draw(Assets.get().getTexture("textures/background.png"),  getCam().position.x - LudumDare.WIDTH / 2, getCam().position.y - LudumDare.HEIGHT / 2, LudumDare.WIDTH, LudumDare.HEIGHT);
+        sb.end();
+        sb.enableBlending();
+
         level.getRenderer().setView(getCam());
         sb.begin();
         level.draw(game.getBatch());
