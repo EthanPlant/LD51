@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen extends Screen {
     // Level
@@ -19,13 +20,19 @@ public class GameScreen extends Screen {
     //Input
     private KeyboardInputController input;
 
+    private long timer;
+    private int timeToSwitch;
+
     public GameScreen(LudumDare game) {
         super(game);
 
         level = new Level(Assets.get().getTiledMap("maps/testmap.tmx"));
 
-        input = new KeyboardInputController(level);
+        input = new KeyboardInputController();
         input.enable();
+
+        timer = TimeUtils.nanoTime();
+        timeToSwitch = 10;
     }
 
     @Override
@@ -36,9 +43,18 @@ public class GameScreen extends Screen {
         if (input.right()) level.getPlayer().setVel(new Vector2(Player.PLAYER_SPEED * LudumDare.TILE_SIZE, level.getPlayer().getVel().y));
         if (input.jump()) level.getPlayer().jump();
 
-        if (input.switchGrav()) level.switchGravity();
-
         if (!input.left() && !input.right()) level.getPlayer().setVel(new Vector2(0, level.getPlayer().getVel().y));
+
+        if (TimeUtils.nanoTime() - timer >= 1_000_000_000) {
+            timeToSwitch--;
+            System.out.println(timeToSwitch);
+            // TODO Update HUD
+            if (timeToSwitch == 0) {
+                level.switchGravity();
+                timeToSwitch = 10;
+            }
+            timer = TimeUtils.nanoTime();
+        }
 
         level.update(delta);
         getCam().position.set(level.getPlayer().getPos(), 0);

@@ -11,13 +11,6 @@ public class KeyboardInputController extends InputController implements InputPro
     private boolean left;
     private boolean right;
     private boolean jump;
-    private boolean switchGrav;
-
-    private Level level;
-
-    public KeyboardInputController(Level level) {
-        this.level = level;
-    }
 
     @Override
     public void update(float delta) {
@@ -42,11 +35,6 @@ public class KeyboardInputController extends InputController implements InputPro
     }
 
     @Override
-    public boolean switchGrav() {
-        return switchGrav;
-    }
-
-    @Override
     public boolean keyDown(int keycode) {
         if (enabled) {
             switch (keycode) {
@@ -58,9 +46,6 @@ public class KeyboardInputController extends InputController implements InputPro
                     break;
                 case Input.Keys.W:
                     jump = true;
-                    break;
-                case Input.Keys.SPACE:
-                    level.switchGravity();
                     break;
                 default:
                     break;
