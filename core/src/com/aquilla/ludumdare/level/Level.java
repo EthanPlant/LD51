@@ -1,6 +1,7 @@
 package com.aquilla.ludumdare.level;
 
 import com.aquilla.ludumdare.level.entity.Player;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -37,10 +38,10 @@ public class Level {
         player.update(delta, isGravityDown);
     }
 
-    public void draw() {
+    public void draw(SpriteBatch sb) {
         renderer.render();
 
-        // TODO Draw player sprite
+        player.draw(sb, isGravityDown);
     }
 
     private Vector2 findPlayerSpawn() {

@@ -92,14 +92,8 @@ public class GameScreen extends Screen {
         sr.setProjectionMatrix(getCam().combined);
 
         level.getRenderer().setView(getCam());
-        level.draw();
-
-        sr.begin(ShapeRenderer.ShapeType.Filled);
-        sr.setColor(Palette.TETANUS);
-        sr.rect(level.getPlayer().getPos().x, level.getPlayer().getPos().y, level.getPlayer().getBoundingBox().getWidth(), level.getPlayer().getBoundingBox().getHeight());
-        sr.end();
-
         sb.begin();
+        level.draw(game.getBatch());
         hud.draw(game.getBatch());
         sb.end();
     }

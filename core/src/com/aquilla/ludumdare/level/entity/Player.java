@@ -4,6 +4,8 @@ import com.aquilla.ludumdare.LudumDare;
 import com.aquilla.ludumdare.assets.Assets;
 import com.aquilla.ludumdare.level.Level;
 import com.aquilla.ludumdare.util.CollisionHandler;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Player extends Entity {
 
@@ -16,9 +18,14 @@ public class Player extends Entity {
 
     public enum State {STANDING, RUNNING, JUMPING, FALLING}
     private State state;
+    private Texture texture;
+    private boolean isRight;
 
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
+        boundingBox.height = 18;
+        isRight = true;
+        texture = Assets.get().getTexture("textures/player.png");
         state = State.STANDING;
     }
 
@@ -53,6 +60,9 @@ public class Player extends Entity {
             accel.x = 0;
         }
 
+        if (vel.x > 0) isRight = true;
+        else if (vel.x < 0) isRight = false;
+
         if (vel.y > 0 && isDown || vel.y < 0 && !isDown) state = State.JUMPING;
         if (vel.y < 0 || vel.y > 0 && !isDown) state = State.FALLING;
 
@@ -70,7 +80,11 @@ public class Player extends Entity {
         // Update the new position
         pos.add(vel.cpy().scl(delta));
         boundingBox.x = pos.x;
-        boundingBox.y = pos.y;
+        boundingBox.y = isDown ? pos.y : pos.y + 14;
+    }
+
+    public void draw(SpriteBatch sb, boolean isDown) {
+        sb.draw(texture, pos.x, pos.y, texture.getWidth(), texture.getHeight(), 0, 0, texture.getWidth(), texture.getHeight(), isRight, !isDown);
     }
 
     public void jump(boolean isDown) {
