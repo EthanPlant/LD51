@@ -1,5 +1,6 @@
 package com.aquilla.ludumdare.input;
 
+import com.aquilla.ludumdare.level.Level;
 import com.aquilla.ludumdare.screen.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -9,12 +10,13 @@ public class KeyboardInputController extends InputController implements InputPro
 
     private boolean left;
     private boolean right;
-
     private boolean jump;
-    private GameScreen game;
+    private boolean switchGrav;
 
-    public KeyboardInputController(GameScreen game) {
-        this.game = game;
+    private Level level;
+
+    public KeyboardInputController(Level level) {
+        this.level = level;
     }
 
     @Override
@@ -40,6 +42,11 @@ public class KeyboardInputController extends InputController implements InputPro
     }
 
     @Override
+    public boolean switchGrav() {
+        return switchGrav;
+    }
+
+    @Override
     public boolean keyDown(int keycode) {
         if (enabled) {
             switch (keycode) {
@@ -48,6 +55,12 @@ public class KeyboardInputController extends InputController implements InputPro
                     break;
                 case Input.Keys.D:
                     right = true;
+                    break;
+                case Input.Keys.W:
+                    jump = true;
+                    break;
+                case Input.Keys.SPACE:
+                    level.switchGravity();
                     break;
                 default:
                     break;

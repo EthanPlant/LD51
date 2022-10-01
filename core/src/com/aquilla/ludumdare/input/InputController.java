@@ -10,6 +10,7 @@ public abstract class InputController implements InputProcessor {
     abstract public boolean left();
     abstract public boolean right();
     abstract public boolean jump();
+    abstract public boolean switchGrav();
 
     public void enable() {
         enabled = true;

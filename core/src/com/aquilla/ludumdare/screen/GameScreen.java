@@ -22,10 +22,10 @@ public class GameScreen extends Screen {
     public GameScreen(LudumDare game) {
         super(game);
 
-        input = new KeyboardInputController(this);
-        input.enable();
-
         level = new Level(Assets.get().getTiledMap("maps/testmap.tmx"));
+
+        input = new KeyboardInputController(level);
+        input.enable();
     }
 
     @Override
@@ -36,9 +36,11 @@ public class GameScreen extends Screen {
         if (input.right()) level.getPlayer().setVel(new Vector2(Player.PLAYER_SPEED * LudumDare.TILE_SIZE, level.getPlayer().getVel().y));
         if (input.jump()) level.getPlayer().jump();
 
+        if (input.switchGrav()) level.switchGravity();
+
         if (!input.left() && !input.right()) level.getPlayer().setVel(new Vector2(0, level.getPlayer().getVel().y));
 
-        level.getPlayer().update(delta);
+        level.update(delta);
         getCam().position.set(level.getPlayer().getPos(), 0);
 
         getCam().update();

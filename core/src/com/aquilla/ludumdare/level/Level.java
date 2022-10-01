@@ -10,6 +10,8 @@ import static com.aquilla.ludumdare.LudumDare.TILE_SIZE;
 public class Level {
     public static int GRAVITY_STRENGTH = 15 * TILE_SIZE;
 
+    private boolean isGravityDown;
+
     // Player
     private Player player;
 
@@ -20,11 +22,17 @@ public class Level {
     public Level(TiledMap map) {
         this.map = map;
         renderer = new OrthogonalTiledMapRenderer(map);
+
         player = new Player(0, TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE);
         player.setAccel(new Vector2(0, -1 * GRAVITY_STRENGTH));
+
+        isGravityDown = true;
     }
 
     public void update(float delta) {
+        // Set player gravity
+        if (isGravityDown) player.setAccel(new Vector2(0, -1 * GRAVITY_STRENGTH));
+        else player.setAccel(new Vector2(0, GRAVITY_STRENGTH));
         player.update(delta);
     }
 
@@ -32,6 +40,10 @@ public class Level {
         renderer.render();
 
         // TODO Draw player sprite
+    }
+
+    public void switchGravity() {
+        isGravityDown = !isGravityDown;
     }
 
     public OrthogonalTiledMapRenderer getRenderer() {
