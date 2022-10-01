@@ -2,6 +2,7 @@ package com.aquilla.ludumdare.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 // Basic singleton class for handling assets
@@ -21,6 +22,10 @@ public class Assets {
 
     public TiledMap getTiledMap(String ref) {
         return manager.get(ref, TiledMap.class);
+    }
+
+    public BitmapFont getFont(String ref) {
+        return manager.get(ref, BitmapFont.class);
     }
 
     public void provide(AssetManager assets) {

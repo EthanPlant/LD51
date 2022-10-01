@@ -5,6 +5,7 @@ import com.aquilla.ludumdare.assets.Assets;
 import com.aquilla.ludumdare.level.Level;
 import com.aquilla.ludumdare.input.KeyboardInputController;
 import com.aquilla.ludumdare.level.entity.Player;
+import com.aquilla.ludumdare.ui.Hud;
 import com.aquilla.ludumdare.util.Palette;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -23,6 +24,8 @@ public class GameScreen extends Screen {
     private long timer;
     private int timeToSwitch;
 
+    private Hud hud;
+
     public GameScreen(LudumDare game) {
         super(game);
 
@@ -33,6 +36,8 @@ public class GameScreen extends Screen {
 
         timer = TimeUtils.nanoTime();
         timeToSwitch = 10;
+
+        hud = new Hud(this);
     }
 
     @Override
@@ -60,6 +65,8 @@ public class GameScreen extends Screen {
         getCam().position.set(level.getPlayer().getPos(), 0);
 
         getCam().update();
+
+        hud.update();
     }
 
     @Override
@@ -77,5 +84,13 @@ public class GameScreen extends Screen {
         sr.setColor(Palette.TETANUS);
         sr.rect(level.getPlayer().getPos().x, level.getPlayer().getPos().y, level.getPlayer().getBoundingBox().getWidth(), level.getPlayer().getBoundingBox().getHeight());
         sr.end();
+
+        sb.begin();
+        hud.draw(game.getBatch());
+        sb.end();
+    }
+
+    public int getTime() {
+        return timeToSwitch;
     }
 }
