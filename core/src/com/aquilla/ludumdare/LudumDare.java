@@ -13,6 +13,8 @@ public class LudumDare extends Game {
 	public static final int HEIGHT = 244;
 	public static final int SCALE = 2;
 
+	public static final int TILE_SIZE = 8;
+
 	public enum Mode { DESKTOP, HTML }
 	public static Mode mode;
 
