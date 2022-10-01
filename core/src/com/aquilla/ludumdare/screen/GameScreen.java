@@ -67,7 +67,6 @@ public class GameScreen extends Screen {
         if (TimeUtils.nanoTime() - timer >= 1_000_000_000) {
             timeToSwitch--;
             System.out.println(timeToSwitch);
-            // TODO Update HUD
             if (timeToSwitch == 0) {
                 level.switchGravity();
                 timeToSwitch = 10;
@@ -77,7 +76,9 @@ public class GameScreen extends Screen {
 
         level.update(delta);
 
-        getCam().update();
+        if (level.getPlayer().getPos().x > getCam().position.x + LudumDare.WIDTH / 2) getCam().setTargetPos(new Vector2(LudumDare.WIDTH / 2 + level.getPlayer().getPos().x, LudumDare.HEIGHT / 2));
+
+        getCam().update(delta);
 
         hud.update();
     }
