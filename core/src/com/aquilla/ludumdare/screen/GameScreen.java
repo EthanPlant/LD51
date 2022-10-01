@@ -29,7 +29,7 @@ public class GameScreen extends Screen {
     public GameScreen(LudumDare game) {
         super(game);
 
-        level = new Level(Assets.get().getTiledMap("maps/testmap.tmx"));
+        level = new Level(Assets.get().getTiledMap("maps/level1.tmx"));
 
         input = new KeyboardInputController();
         input.enable();
@@ -76,7 +76,6 @@ public class GameScreen extends Screen {
         }
 
         level.update(delta);
-        getCam().position.set(level.getPlayer().getPos(), 0);
 
         getCam().update();
 

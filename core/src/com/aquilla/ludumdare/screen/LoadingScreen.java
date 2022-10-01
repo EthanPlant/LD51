@@ -34,6 +34,7 @@ public class LoadingScreen extends Screen{
         // Load all assets
         assets.load("fonts/hud.fnt", BitmapFont.class);
         assets.load("maps/testmap.tmx", TiledMap.class);
+        assets.load("maps/level1.tmx", TiledMap.class);
         assets.load("textures/player.atlas", TextureAtlas.class);
     }
 

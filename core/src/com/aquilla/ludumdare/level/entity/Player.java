@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 
 public class Player extends Entity {
 
-    public static final int PLAYER_SPEED = 10 * LudumDare.TILE_SIZE;
-    public static final int JUMP_SPEED = 7 * LudumDare.TILE_SIZE;
+    public static final int PLAYER_SPEED = 6 * LudumDare.TILE_SIZE;
+    public static final int JUMP_SPEED = 10 * LudumDare.TILE_SIZE;
 
     public static final int ACCEL_SPEED = 15 * LudumDare.TILE_SIZE;
     public static final int DECEL_SPEED = 50 * LudumDare.TILE_SIZE;
@@ -73,10 +73,10 @@ public class Player extends Entity {
 
         // Check for collision
         boundingBox.x += (vel.x * delta);
-        if (CollisionHandler.get().isCollidingWithMap(this, Assets.get().getTiledMap("maps/testmap.tmx"))) vel.x = 0;
+        if (CollisionHandler.get().isCollidingWithMap(this, Assets.get().getTiledMap("maps/level1.tmx"))) vel.x = 0;
         boundingBox.x = pos.x;
         boundingBox.y += (vel.y * delta);
-        if (CollisionHandler.get().isCollidingWithMap(this, Assets.get().getTiledMap("maps/testmap.tmx"))) {
+        if (CollisionHandler.get().isCollidingWithMap(this, Assets.get().getTiledMap("maps/level1.tmx"))) {
             if (state == State.FALLING) state = State.RUNNING; // We've hit the ground so we're no longer falling
             vel.y = 0;
         }
