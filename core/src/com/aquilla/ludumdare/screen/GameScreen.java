@@ -46,7 +46,7 @@ public class GameScreen extends Screen {
 
         if (input.left()) level.getPlayer().setVel(new Vector2(-1 * Player.PLAYER_SPEED * LudumDare.TILE_SIZE, level.getPlayer().getVel().y));
         if (input.right()) level.getPlayer().setVel(new Vector2(Player.PLAYER_SPEED * LudumDare.TILE_SIZE, level.getPlayer().getVel().y));
-        if (input.jump()) level.getPlayer().jump();
+        if (input.jump()) level.getPlayer().jump(level.isGravityDown());
 
         if (!input.left() && !input.right()) level.getPlayer().setVel(new Vector2(0, level.getPlayer().getVel().y));
 

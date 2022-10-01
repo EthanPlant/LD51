@@ -33,7 +33,7 @@ public class Level {
         // Set player gravity
         if (isGravityDown) player.setAccel(new Vector2(0, -1 * GRAVITY_STRENGTH));
         else player.setAccel(new Vector2(0, GRAVITY_STRENGTH));
-        player.update(delta);
+        player.update(delta, isGravityDown);
     }
 
     public void draw() {
@@ -52,5 +52,9 @@ public class Level {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public boolean isGravityDown() {
+        return isGravityDown;
     }
 }

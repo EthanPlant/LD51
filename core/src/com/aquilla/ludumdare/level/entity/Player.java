@@ -17,12 +17,12 @@ public class Player extends Entity {
         state = State.RUNNING;
     }
 
-    @Override
-    public void update(float delta) {
+
+    public void update(float delta, boolean isDown) {
         vel.add(accel.cpy().scl(delta)); // Add acceleration to velocity prior to collision check
 
-        if (vel.y > 0) state = State.JUMPING;
-        if (vel.y < 0) state = State.FALLING;
+        if (vel.y > 0 && isDown || vel.y < 0 && !isDown) state = State.JUMPING;
+        if (vel.y < 0 || vel.y > 0 && !isDown) state = State.FALLING;
 
         // Check for collision
         boundingBox.x += (vel.x * delta);
@@ -41,9 +41,10 @@ public class Player extends Entity {
         boundingBox.y = pos.y;
     }
 
-    public void jump() {
+    public void jump(boolean isDown) {
         if (state == State.RUNNING) {
-            vel.y = JUMP_SPEED * LudumDare.TILE_SIZE;
+            if (isDown) vel.y =  JUMP_SPEED * LudumDare.TILE_SIZE;
+            else vel.y =  -1 * JUMP_SPEED * LudumDare.TILE_SIZE;
             state = State.JUMPING;
         }
     }
