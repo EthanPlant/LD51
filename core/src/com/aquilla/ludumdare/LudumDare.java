@@ -9,11 +9,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class LudumDare extends Game {
 
 	public static final String TITLE = "Ludum Dare 51";
-	public static final int WIDTH = 340;
+	public static final int WIDTH = 434;
 	public static final int HEIGHT = 244;
 	public static final int SCALE = 2;
 
-	public static final int TILE_SIZE = 8;
+	public static final int TILE_SIZE = 16;
 
 	public enum Mode { DESKTOP, HTML }
 	public static Mode mode;
