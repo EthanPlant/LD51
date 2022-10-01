@@ -76,7 +76,9 @@ public class GameScreen extends Screen {
 
         level.update(delta);
 
-        if (level.getPlayer().getPos().x > getCam().position.x + LudumDare.WIDTH / 2) getCam().setTargetPos(new Vector2(LudumDare.WIDTH / 2 + level.getPlayer().getPos().x, LudumDare.HEIGHT / 2));
+        // If player has left screen, move camera one screen width forward or back
+        if (level.getPlayer().getPos().x >= getCam().position.x + LudumDare.WIDTH / 2) getCam().setTargetPos(new Vector2(getCam().position.x + LudumDare.WIDTH, LudumDare.HEIGHT / 2));
+        if (level.getPlayer().getPos().x < getCam().position.x - LudumDare.WIDTH / 2) getCam().setTargetPos(new Vector2(getCam().position.x - LudumDare.WIDTH, LudumDare.HEIGHT / 2));
 
         getCam().update(delta);
 
