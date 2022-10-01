@@ -44,7 +44,7 @@ public class Level {
     }
 
     private Vector2 findPlayerSpawn() {
-        Rectangle rect = ((RectangleMapObject) map.getLayers().get("player_spawn").getObjects().get(0)).getRectangle();
+        Rectangle rect = ((RectangleMapObject) map.getLayers().get("player_spawn").getObjects().get("spawnpoint")).getRectangle();
         return new Vector2(rect.x, rect.y);
     }
 
