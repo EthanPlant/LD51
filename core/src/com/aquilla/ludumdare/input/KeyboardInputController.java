@@ -16,7 +16,7 @@ public class KeyboardInputController extends InputController implements InputPro
     public void update(float delta) {
         left = Gdx.input.isKeyPressed(Input.Keys.A);
         right = Gdx.input.isKeyPressed(Input.Keys.D);
-        jump = Gdx.input.isKeyPressed(Input.Keys.W);
+        jump = Gdx.input.isKeyPressed(Input.Keys.SPACE);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class KeyboardInputController extends InputController implements InputPro
                 case Input.Keys.D:
                     right = true;
                     break;
-                case Input.Keys.W:
+                case Input.Keys.SPACE:
                     jump = true;
                     break;
                 default:

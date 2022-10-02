@@ -14,5 +14,5 @@ void main(void)
   if (mod(p.y, 2.0)==0.0)
     gl_FragColor = vec4(texture2D(u_sampler2D,v_texCoords).xyz ,1.0);
   else
-    gl_FragColor = vec4(0.0,0.0,0.0,1.0);
+    gl_FragColor = vec4(0.2,0.2,0.2,1.0);
 }

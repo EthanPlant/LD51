@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Matrix4;
 
 public class TitleScreen extends Screen implements InputProcessor {
 
@@ -29,9 +30,15 @@ public class TitleScreen extends Screen implements InputProcessor {
 
     @Override
     public void draw(SpriteBatch sb, ShapeRenderer sr) {
+        // Reset camera projection matrix
+        Matrix4 uiMatrix = getCam().combined.cpy();
+        uiMatrix.setToOrtho2D(0, 0, LudumDare.WIDTH, LudumDare.HEIGHT);
+        sr.setProjectionMatrix(uiMatrix);
+        sb.setProjectionMatrix(uiMatrix);
+
         sb.begin();
         TextureRegion currentFrame = animation.getKeyFrame(frameCount, true);
-        sb.draw(currentFrame, LudumDare.WIDTH / 2,LudumDare.HEIGHT / 2, LudumDare.WIDTH, LudumDare.HEIGHT);
+        sb.draw(currentFrame, 0, 0, LudumDare.WIDTH, LudumDare.HEIGHT);
         sb.end();
     }
 
