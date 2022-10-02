@@ -34,9 +34,9 @@ public class GameScreen extends Screen {
         timer = TimeUtils.nanoTime();
         timeToSwitch = 10;
 
-        Assets.get().getMusic("music/bgm.wav").setLooping(true);
-        Assets.get().getMusic("music/bgm.wav").setVolume(0.5F);
-        Assets.get().getMusic("music/bgm.wav").play();
+        Assets.get().getMusic("music/bgm.ogg").setLooping(true);
+        Assets.get().getMusic("music/bgm.ogg").setVolume(0.5F);
+        Assets.get().getMusic("music/bgm.ogg").play();
 
         hud = new Hud(this);
     }
