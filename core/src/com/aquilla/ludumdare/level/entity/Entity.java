@@ -29,6 +29,10 @@ public class Entity {
         return pos;
     }
 
+    public void setPos(Vector2 pos) {
+        this.pos = pos;
+    }
+
     public Vector2 getVel() {
         return vel;
     }
