@@ -38,7 +38,7 @@ public class LoadingScreen extends Screen{
         assets.load("fonts/hud.fnt", BitmapFont.class);
         assets.load("maps/level1.tmx", TiledMap.class);
         assets.load("maps/testmap.tmx", TiledMap.class);
-        assets.load("music/bgm.ogg", Music.class);
+        assets.load("music/bgm.wav", Music.class);
         assets.load("sounds/jump.wav", Sound.class);
         assets.load("sounds/switch.wav", Sound.class);
         assets.load("sounds/whoosh.wav", Sound.class);
