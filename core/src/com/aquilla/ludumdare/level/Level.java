@@ -41,7 +41,7 @@ public class Level {
     public void update(float delta) {
         player.update(delta, isGravityDown);
         checkCheckpoint();
-        if(CollisionHandler.get().isCollidingWithObstacle(player, map)) player.setPos(lastCheckpoint);
+        if(CollisionHandler.get().isCollidingWithObstacle(player, map))  player.setPos(lastCheckpoint.cpy());
     }
 
     public void draw(SpriteBatch sb) {

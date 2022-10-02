@@ -10,6 +10,7 @@ public class SmoothCamera extends OrthographicCamera {
     private Vector2 lastPos;
 
     public SmoothCamera(float x, float y) {
+        super();
         position.x = x;
         position.y = y;
         lastPos = new Vector2(x, y);
