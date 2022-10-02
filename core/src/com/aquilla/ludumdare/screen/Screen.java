@@ -3,6 +3,7 @@ package com.aquilla.ludumdare.screen;
 import com.aquilla.ludumdare.LudumDare;
 import com.aquilla.ludumdare.camera.SmoothCamera;
 import com.aquilla.ludumdare.util.Palette;
+import com.aquilla.ludumdare.util.Shader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.HdpiUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -56,14 +58,18 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
+
         draw(game.getBatch(), game.getShapeRenderer());
+        game.getBatch().setShader(null);
 
         fbo.end();
 
         game.getBatch().begin();
         game.getBatch().setProjectionMatrix(viewportCam.combined);
+        game.getBatch().setShader(Shader.SCANLINE);
         game.getBatch().draw(fbo.getColorBufferTexture(), (LudumDare.SCALE * LudumDare.WIDTH - LudumDare.WIDTH) / 2, (LudumDare.SCALE * LudumDare.HEIGHT - LudumDare.HEIGHT) / 2, LudumDare.WIDTH, LudumDare.HEIGHT, 0, 0, 1f, 1f);
         game.getBatch().end();
+        game.getBatch().setShader(null);
 
         HdpiUtils.glScissor(0, 0, LudumDare.WIDTH * LudumDare.SCALE, LudumDare.HEIGHT * LudumDare.SCALE);
     }
@@ -74,6 +80,8 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
 
     @Override
     public void resize(int width, int height) {
+        Shader.SCANLINE.bind();
+        Shader.SCANLINE.setUniformf("u_screenHeight", height);
         viewport.update(width, height);
     }
 

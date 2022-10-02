@@ -2,6 +2,7 @@ package com.aquilla.ludumdare.screen;
 
 import com.aquilla.ludumdare.LudumDare;
 import com.aquilla.ludumdare.assets.Assets;
+import com.aquilla.ludumdare.util.Shader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Animation;
