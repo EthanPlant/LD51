@@ -37,12 +37,14 @@ public class LoadingScreen extends Screen{
         // Load all assets
         assets.load("fonts/hud.fnt", BitmapFont.class);
         assets.load("maps/level1.tmx", TiledMap.class);
+        assets.load("maps/floor0.tmx", TiledMap.class);
         assets.load("maps/testmap.tmx", TiledMap.class);
         assets.load("music/bgm.ogg", Music.class);
         assets.load("sounds/jump.wav", Sound.class);
         assets.load("sounds/switch.wav", Sound.class);
         assets.load("sounds/whoosh.wav", Sound.class);
         assets.load("textures/background.png", Texture.class);
+        assets.load("textures/endscreen.png", Texture.class);
         assets.load("textures/player.atlas", TextureAtlas.class);
         assets.load("textures/titlescreen.atlas", TextureAtlas.class);
     }

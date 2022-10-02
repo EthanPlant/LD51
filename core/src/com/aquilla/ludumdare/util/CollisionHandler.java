@@ -17,7 +17,7 @@ public class CollisionHandler {
     }
 
     public boolean isCollidingWithMap(Entity e, TiledMap map) {
-        for (MapObject object : map.getLayers().get("collision").getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get("collisions").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             if (e.getBoundingBox().overlaps(rect)) return true;
         }

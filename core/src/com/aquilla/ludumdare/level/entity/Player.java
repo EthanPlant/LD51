@@ -3,12 +3,10 @@ package com.aquilla.ludumdare.level.entity;
 import com.aquilla.ludumdare.LudumDare;
 import com.aquilla.ludumdare.assets.Assets;
 import com.aquilla.ludumdare.util.CollisionHandler;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 
 public class Player extends Entity {
 
@@ -37,7 +35,7 @@ public class Player extends Entity {
     }
 
 
-    public void update(float delta, boolean isDown) {
+    public void update(float delta, boolean isDown, TiledMap map) {
         float oldX = vel.x;
         // Decelerate to a stop if needed
         if (state == State.STANDING) {
@@ -75,12 +73,12 @@ public class Player extends Entity {
 
         // Check for collision
         boundingBox.x += (vel.x * delta);
-        if (CollisionHandler.get().isCollidingWithMap(this, Assets.get().getTiledMap("maps/level1.tmx")))  {
+        if (CollisionHandler.get().isCollidingWithMap(this, map))  {
             vel.x = 0;
         }
         boundingBox.x = pos.x;
         boundingBox.y += (vel.y * delta);
-        if (CollisionHandler.get().isCollidingWithMap(this, Assets.get().getTiledMap("maps/level1.tmx"))) {
+        if (CollisionHandler.get().isCollidingWithMap(this, map)) {
             if (state == State.FALLING) {
                 state = vel.x != 0 ? State.RUNNING : State.STANDING; // We've hit the ground so we're no longer falling
             }

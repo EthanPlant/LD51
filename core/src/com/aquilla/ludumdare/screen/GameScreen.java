@@ -8,6 +8,9 @@ import com.aquilla.ludumdare.level.entity.Player;
 import com.aquilla.ludumdare.ui.Hud;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -26,7 +29,7 @@ public class GameScreen extends Screen {
     public GameScreen(LudumDare game) {
         super(game);
 
-        level = new Level(Assets.get().getTiledMap("maps/level1.tmx"));
+        level = new Level(Assets.get().getTiledMap("maps/floor0.tmx"));
 
         input = new KeyboardInputController();
         input.enable();
@@ -76,6 +79,13 @@ public class GameScreen extends Screen {
         }
 
         level.update(delta);
+
+        // Check if player has reached end
+        Rectangle rect = ((RectangleMapObject) Assets.get().getTiledMap("maps/floor0.tmx").getLayers().get("gameover").getObjects().get(0)).getRectangle();
+        if (level.getPlayer().getBoundingBox().overlaps(rect)) {
+            transitionToScreen(new EndScreen(game));
+            Assets.get().getMusic("music/bgm.ogg").stop();
+        }
 
         // If player has left screen, move camera one screen width forward or back
         if (level.getPlayer().getPos().x >= getCam().position.x + LudumDare.WIDTH / 2) {

@@ -39,7 +39,7 @@ public class Level {
     }
 
     public void update(float delta) {
-        player.update(delta, isGravityDown);
+        player.update(delta, isGravityDown, map);
         checkCheckpoint();
         if(CollisionHandler.get().isCollidingWithObstacle(player, map))  player.setPos(lastCheckpoint.cpy());
     }
