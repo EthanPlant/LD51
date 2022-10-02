@@ -1,0 +1,69 @@
+
+titlescreen.png
+size: 2048, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+titlescreen
+  rotate: false
+  xy: 2, 2
+  size: 216, 122
+  orig: 216, 122
+  offset: 0, 0
+  index: 5
+titlescreen
+  rotate: false
+  xy: 220, 2
+  size: 216, 122
+  orig: 216, 122
+  offset: 0, 0
+  index: 2
+titlescreen
+  rotate: false
+  xy: 438, 2
+  size: 216, 122
+  orig: 216, 122
+  offset: 0, 0
+  index: 7
+titlescreen
+  rotate: false
+  xy: 656, 2
+  size: 216, 122
+  orig: 216, 122
+  offset: 0, 0
+  index: 4
+titlescreen
+  rotate: false
+  xy: 874, 2
+  size: 216, 122
+  orig: 216, 122
+  offset: 0, 0
+  index: 1
+titlescreen
+  rotate: false
+  xy: 1092, 2
+  size: 216, 122
+  orig: 216, 122
+  offset: 0, 0
+  index: 6
+titlescreen
+  rotate: false
+  xy: 1310, 2
+  size: 216, 122
+  orig: 216, 122
+  offset: 0, 0
+  index: 3
+titlescreen
+  rotate: false
+  xy: 1528, 2
+  size: 216, 122
+  orig: 216, 122
+  offset: 0, 0
+  index: 8
+titlescreen
+  rotate: false
+  xy: 1746, 2
+  size: 216, 122
+  orig: 216, 122
+  offset: 0, 0
+  index: 0

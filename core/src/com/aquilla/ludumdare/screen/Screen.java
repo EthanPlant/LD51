@@ -6,7 +6,11 @@ import com.aquilla.ludumdare.util.Palette;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.HdpiUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -15,6 +19,8 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     protected LudumDare game;
     private Viewport viewport;
     private SmoothCamera cam;
+    private OrthographicCamera viewportCam;
+    private FrameBuffer fbo;
 
     abstract public void update(float delta);
     abstract public void draw(SpriteBatch sb, ShapeRenderer sr);
@@ -22,8 +28,17 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     public Screen(LudumDare game) {
         this.game = game;
 
+        fbo = new FrameBuffer(Pixmap.Format.RGBA8888, LudumDare.WIDTH, LudumDare.HEIGHT, false);
+        fbo.getColorBufferTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+
         cam = new SmoothCamera(LudumDare.WIDTH / 2, LudumDare.HEIGHT / 2);
-        viewport = new FitViewport(LudumDare.WIDTH, LudumDare.HEIGHT, cam);
+
+        viewportCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewportCam.position.set(0.5f * viewportCam.viewportWidth, 0.5f * viewportCam.viewportHeight, 0);
+        viewportCam.update();
+
+        viewport = new FitViewport(LudumDare.WIDTH, LudumDare.HEIGHT, viewportCam);
+        viewport.apply();
     }
 
     @Override
@@ -35,12 +50,22 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     public void render(float delta) {
         update(delta);
 
+        fbo.begin();
         Gdx.gl.glClearColor(Palette.INK.r, Palette.INK.g, Palette.INK.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
         draw(game.getBatch(), game.getShapeRenderer());
+
+        fbo.end();
+
+        game.getBatch().begin();
+        game.getBatch().setProjectionMatrix(viewportCam.combined);
+        game.getBatch().draw(fbo.getColorBufferTexture(), (LudumDare.SCALE * LudumDare.WIDTH - LudumDare.WIDTH) / 2, (LudumDare.SCALE * LudumDare.HEIGHT - LudumDare.HEIGHT) / 2, LudumDare.WIDTH, LudumDare.HEIGHT, 0, 0, 1f, 1f);
+        game.getBatch().end();
+
+        HdpiUtils.glScissor(0, 0, LudumDare.WIDTH * LudumDare.SCALE, LudumDare.HEIGHT * LudumDare.SCALE);
     }
 
     public void transitionToScreen(Screen next) {

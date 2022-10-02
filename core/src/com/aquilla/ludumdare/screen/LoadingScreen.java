@@ -44,6 +44,7 @@ public class LoadingScreen extends Screen{
         assets.load("sounds/whoosh.wav", Sound.class);
         assets.load("textures/background.png", Texture.class);
         assets.load("textures/player.atlas", TextureAtlas.class);
+        assets.load("textures/titlescreen.atlas", TextureAtlas.class);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class LoadingScreen extends Screen{
             Assets.get().provide(assets);
             if (!loaded) {
                 loaded = true;
-                transitionToScreen(new GameScreen(getGame()));
+                transitionToScreen(new TitleScreen(getGame()));
             }
         }
     }

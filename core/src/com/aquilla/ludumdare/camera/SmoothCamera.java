@@ -1,5 +1,6 @@
 package com.aquilla.ludumdare.camera;
 
+import com.aquilla.ludumdare.LudumDare;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 
@@ -10,7 +11,7 @@ public class SmoothCamera extends OrthographicCamera {
     private Vector2 lastPos;
 
     public SmoothCamera(float x, float y) {
-        super();
+        super(LudumDare.WIDTH, LudumDare.HEIGHT);
         position.x = x;
         position.y = y;
         lastPos = new Vector2(x, y);
