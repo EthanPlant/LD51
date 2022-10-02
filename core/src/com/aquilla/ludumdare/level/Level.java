@@ -2,6 +2,7 @@ package com.aquilla.ludumdare.level;
 
 import com.aquilla.ludumdare.assets.Assets;
 import com.aquilla.ludumdare.level.entity.Player;
+import com.aquilla.ludumdare.util.CollisionHandler;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -40,6 +41,7 @@ public class Level {
     public void update(float delta) {
         player.update(delta, isGravityDown);
         checkCheckpoint();
+        if(CollisionHandler.get().isCollidingWithObstacle(player, map)) System.out.println("Hit an obstacle!");
     }
 
     public void draw(SpriteBatch sb) {
@@ -58,10 +60,7 @@ public class Level {
         for (MapObject object : map.getLayers().get("checkpoints").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             if (player.getBoundingBox().overlaps(rect)) { // We've hit a checkpoint, check to see if its further than the previous
-                if (rect.x > lastCheckpoint.x) {
-                    lastCheckpoint = new Vector2(rect.x, rect.y);
-                    System.out.println("Hit a new checkpoint!");
-                }
+                if (rect.x > lastCheckpoint.x) lastCheckpoint = new Vector2(rect.x, rect.y);
             }
         }
     }
